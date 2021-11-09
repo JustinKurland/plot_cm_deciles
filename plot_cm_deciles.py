@@ -341,7 +341,7 @@ def plot_cm_deciles(model,
         # Set Marker Colors
         marker_color = marker_color
 
-        # True Negative Plot (upper-right quadrant)
+        # True Negative Plot (upper-left quadrant)
         plt.subplot(2,2,1)
         plt.plot(decile_table['true_negative'], zorder=2, color=str(line_color), linewidth=line_width)
         plt.scatter(decile_table['true_negative'].index,decile_table['true_negative'].values, c = marker_color, zorder=3)
@@ -354,35 +354,35 @@ def plot_cm_deciles(model,
         plt.tick_params(left=False, bottom=False)
         plt.ylabel('True Negatives', fontsize=ax_title_size, fontweight=y_ax_weight)
         plt.grid(which='major', color=grid_color, linewidth=grid_line_width, zorder=1)
-
-        # False Negative Plot (upper-left quadrant)
+        
+        # False Positive Plot (upper-right quandrant)
         plt.subplot(2,2,2)
-        plt.plot(decile_table['false_negative'], zorder=2, color=str(line_color), linewidth=line_width)
-        plt.scatter(decile_table['false_negative'].index,decile_table['false_negative'].values, c = marker_color, zorder=3)
-        for i, txt in enumerate(decile_table['false_negative'].values.astype(np.int64).tolist()):
-            plt.annotate(txt, (decile_table['false_negative'].index[i]+fn_x_label, decile_table['false_negative'].values[i]+(decile_table['false_negative'].values[1]*fn_y_label)), fontsize=label_font_size)
+        plt.plot(decile_table['false_positive'], zorder=2, color=str(line_color), linewidth=line_width)
+        plt.scatter(decile_table['false_positive'].index,decile_table['false_positive'].values, c = marker_color, zorder=3)
+        for i, txt in enumerate(decile_table['false_positive'].values.astype(np.int64).tolist()):
+            plt.annotate(txt, (decile_table['false_positive'].index[i]+fp_x_label, decile_table['false_positive'].values[i]+(decile_table['false_positive'].values[1]*fp_y_label)), fontsize=label_font_size)                            
         ax.xaxis.set_major_locator(MultipleLocator(2))
         ax.xaxis.set_major_formatter(FormatStrFormatter('%d'))
         plt.xticks(color=x_ticks_top)
         plt.ylim(0-y_lim_pad, population+y_lim_pad)
         plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
         plt.tick_params(left=False, bottom=False)
-        plt.ylabel('False Negatives', labelpad=y_lab_pad_right, fontsize=ax_title_size, fontweight=y_ax_weight)
-        plt.grid(which='major', color=grid_color, linewidth=grid_line_width, zorder=1)
-
-        # False Positive Plot (lower-left quandrant)
+        plt.ylabel('False Positives', labelpad=y_lab_pad_right, fontsize=ax_title_size, fontweight=y_ax_weight)
+        plt.grid(which='major', color=grid_color, linewidth=grid_line_width, zorder=2)
+        
+        # False Negative Plot (lower-left quadrant)
         plt.subplot(2,2,3)
-        plt.plot(decile_table['false_positive'], zorder=2, color=str(line_color), linewidth=line_width)
-        plt.scatter(decile_table['false_positive'].index,decile_table['false_positive'].values, c = marker_color, zorder=3)
-        for i, txt in enumerate(decile_table['false_positive'].values.astype(np.int64).tolist()):
-            plt.annotate(txt, (decile_table['false_positive'].index[i]+fp_x_label, decile_table['false_positive'].values[i]+(decile_table['false_positive'].values[0]*fp_y_label)), fontsize=label_font_size)                            
+        plt.plot(decile_table['false_negative'], zorder=2, color=str(line_color), linewidth=line_width)
+        plt.scatter(decile_table['false_negative'].index,decile_table['false_negative'].values, c = marker_color, zorder=3)
+        for i, txt in enumerate(decile_table['false_negative'].values.astype(np.int64).tolist()):
+            plt.annotate(txt, (decile_table['false_negative'].index[i]+fn_x_label, decile_table['false_negative'].values[i]+(decile_table['false_negative'].values[1]*fn_y_label)), fontsize=label_font_size)
         ax.xaxis.set_major_locator(MultipleLocator(2))
         ax.xaxis.set_major_formatter(FormatStrFormatter('%d'))
         plt.ylim(0-y_lim_pad, population+y_lim_pad)
         plt.tick_params(left=False, bottom=False)
         plt.xlabel('Threshold Deciles', fontsize=ax_title_size, fontweight=x_ax_weight)
-        plt.ylabel('False Positives', fontsize=ax_title_size, fontweight=y_ax_weight)
-        plt.grid(which='major', color=grid_color, linewidth=grid_line_width, zorder=2)
+        plt.ylabel('False Negatives', fontsize=ax_title_size, fontweight=y_ax_weight)
+        plt.grid(which='major', color=grid_color, linewidth=grid_line_width, zorder=1)
 
         # True Positive Plot (lower-right quandrant)
         plt.subplot(2,2,4)
