@@ -336,7 +336,7 @@ def plot_cm_deciles(model,
     if output_type=="decile_plot":
         
         # Set Plot/Subplot Dimensions
-        fig, axes = plt.subplots(2, 2, figsize=figsize)
+        fig, [[ax1, ax2], [ax3, ax4]] = plt.subplots(2, 2, figsize=figsize)
 
         # Set Marker Colors
         marker_color = marker_color
@@ -347,8 +347,8 @@ def plot_cm_deciles(model,
         plt.scatter(decile_table['true_negative'].index,decile_table['true_negative'].values, c = marker_color, zorder=3)
         for i, txt in enumerate(decile_table['true_negative'].values.astype(np.int64).tolist()):
             plt.annotate(txt, (decile_table['true_negative'].index[i]+tn_x_label, decile_table['true_negative'].values[i]+(decile_table['true_negative'].values[1]*tn_y_label)), fontsize=label_font_size)   
-        ax.xaxis.set_major_locator(MultipleLocator(2))
-        ax.xaxis.set_major_formatter(FormatStrFormatter('%d'))
+        ax1.xaxis.set_major_locator(MultipleLocator(2))
+        ax1.xaxis.set_major_formatter(FormatStrFormatter('%d'))
         plt.xticks(color=x_ticks_top)
         plt.ylim(0-y_lim_pad, population+y_lim_pad)
         plt.tick_params(left=False, bottom=False)
@@ -361,8 +361,8 @@ def plot_cm_deciles(model,
         plt.scatter(decile_table['false_positive'].index,decile_table['false_positive'].values, c = marker_color, zorder=3)
         for i, txt in enumerate(decile_table['false_positive'].values.astype(np.int64).tolist()):
             plt.annotate(txt, (decile_table['false_positive'].index[i]+fp_x_label, decile_table['false_positive'].values[i]+(decile_table['false_positive'].values[1]*fp_y_label)), fontsize=label_font_size)                            
-        ax.xaxis.set_major_locator(MultipleLocator(2))
-        ax.xaxis.set_major_formatter(FormatStrFormatter('%d'))
+        ax2.xaxis.set_major_locator(MultipleLocator(2))
+        ax2.xaxis.set_major_formatter(FormatStrFormatter('%d'))
         plt.xticks(color=x_ticks_top)
         plt.ylim(0-y_lim_pad, population+y_lim_pad)
         plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
@@ -376,8 +376,8 @@ def plot_cm_deciles(model,
         plt.scatter(decile_table['false_negative'].index,decile_table['false_negative'].values, c = marker_color, zorder=3)
         for i, txt in enumerate(decile_table['false_negative'].values.astype(np.int64).tolist()):
             plt.annotate(txt, (decile_table['false_negative'].index[i]+fn_x_label, decile_table['false_negative'].values[i]+(decile_table['false_negative'].values[1]*fn_y_label)), fontsize=label_font_size)
-        ax.xaxis.set_major_locator(MultipleLocator(2))
-        ax.xaxis.set_major_formatter(FormatStrFormatter('%d'))
+        ax3.xaxis.set_major_locator(MultipleLocator(2))
+        ax3.xaxis.set_major_formatter(FormatStrFormatter('%d'))
         plt.ylim(0-y_lim_pad, population+y_lim_pad)
         plt.tick_params(left=False, bottom=False)
         plt.xlabel('Threshold Deciles', fontsize=ax_title_size, fontweight=x_ax_weight)
@@ -390,8 +390,8 @@ def plot_cm_deciles(model,
         plt.scatter(decile_table['true_positive'].index,decile_table['true_positive'].values, c = marker_color, zorder=3)
         for i, txt in enumerate(decile_table['true_positive'].values.astype(np.int64).tolist()):
             plt.annotate(txt, (decile_table['true_positive'].index[i]+tp_x_label, decile_table['true_positive'].values[i]+(decile_table['true_positive'].values[0]*tp_y_label)), fontsize=label_font_size) 
-        ax.xaxis.set_major_locator(MultipleLocator(2))
-        ax.xaxis.set_major_formatter(FormatStrFormatter('%d'))
+        ax4.xaxis.set_major_locator(MultipleLocator(2))
+        ax4.xaxis.set_major_formatter(FormatStrFormatter('%d'))
         plt.ylim(0-y_lim_pad, population+y_lim_pad)
         plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
         plt.tick_params(left=False, bottom=False)
