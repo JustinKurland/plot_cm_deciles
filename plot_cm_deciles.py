@@ -167,165 +167,32 @@ def plot_cm_deciles(model,
     else:
         plt.style.use(plot_style)
 
-    # Baseline Metrics (@.00)
-    threshold = 0.0
-
-    # Classify y_pred based upon @.00 threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @0.00
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @.00
-    dt0 = pd.DataFrame([tn, fp, fn, tp]) \
+   def get_df(X_t,y_t,t):
+    
+        # Baseline Metrics
+        threshold = 0.0
+    
+        # Classify y_pred based upon thresholds
+        y_pred = (model.predict_proba(X_t)[:, 1] > t).astype('float')
+    
+        # Confusion Matrix
+        tn, fp, fn, tp = confusion_matrix(y_t, y_pred).ravel()
+    
+        # Threshold DataFrame
+        return pd.DataFrame([tn, fp, fn, tp]) \
         .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.0})
-
-    # Baseline Metrics (@.10)
-    threshold = 0.1
-
-    # Classify y_pred based upon @.10 threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @.10
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @.10
-    dt1 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.1})
-
-    # Baseline Metrics (@.20)
-    threshold = 0.2
-
-    # Classify y_pred based upon @.20 threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @.20
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @.20
-    dt2 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.2})
-
-    # Baseline Metrics (@.30)
-    threshold = 0.3
-
-    # Classify y_pred based upon threshold @.30
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @.30
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @.30
-    dt3 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.3})
-
-    # Baseline Metrics (@.40)
-    threshold = 0.4
-
-    # Classify y_pred based upon @.40 threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @.40
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @.40
-    dt4 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.4})
-
-    # Baseline Metrics (@.50)
-    threshold = 0.5
-
-    # Classify y_pred based upon threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # 0.50 Threshold DataFrame
-    dt5 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.5})
-
-    # Baseline Metrics (@.60)
-    threshold = 0.6
-
-    # Classify y_pred based upon @.60 threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @.60
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @.60
-    dt6 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.6})
-
-    # Baseline Metrics (@.70)
-    threshold = 0.7
-
-    # Classify y_pred based upon @.70 threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @.70
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @.70
-    dt7 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.7})
-
-    # Baseline Metrics (@.80)
-    threshold = 0.8
-
-    # Classify y_pred based upon @.80 threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @.80
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @.80
-    dt8 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.8})
-
-    # Baseline Metrics (@.90)
-    threshold = 0.9
-
-    # Classify y_pred based upon @.90 threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @.90
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @.90
-    dt9 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:0.9})
-
-    # Baseline Metrics (@1.00)
-    threshold = 1.0
-
-    # Classify y_pred based upon @1.00 threshold
-    y_pred = (model.predict_proba(X_train)[:, 1] > threshold).astype('float')
-
-    # Confusion Matrix @1.00
-    tn, fp, fn, tp = confusion_matrix(y_train, y_pred).ravel()
-
-    # Threshold DataFrame @1.00
-    dt10 = pd.DataFrame([tn, fp, fn, tp]) \
-        .rename(index = {0:'true_negative', 1:'false_positive', 2:'false_negative', 3:'true_positive'}) \
-        .rename(columns = {0:1.0})
+        .rename(columns = {0:t})
 
     # Concat All Threshold Dataframes
-    decile_table = pd.concat([dt0, dt1, dt2, dt3, dt4, dt5, dt6, dt7, dt8, dt9, dt10],axis=1)
-    
+    decile_table = pd.concat([get_df(X_train,y_train,i/10) for i in range(0,11)],axis=1)
+   
     # Transpose DataFrame
     decile_table = decile_table.T
+   
+    # Outputs Decile Threshold Table
+    if output_type=="decile_table":
+
+         return decile_table
 
     # Outputs Decile Threshold Table
     if output_type=="decile_table":
